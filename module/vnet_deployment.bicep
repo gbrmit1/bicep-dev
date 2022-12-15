@@ -25,4 +25,8 @@ resource coreservicesvnet 'Microsoft.Network/virtualNetworks@2022-07-01' = {
   tags:{
     owner: tagowner
   }
+  
 }
+
+output vnetnameforprivatedns string = coreservicesvnet.id
+
