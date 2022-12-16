@@ -10,7 +10,7 @@ param adminPassword string
 param dnsLabelPrefix string = toLower('${vmName}-${uniqueString(resourceGroup().id, vmName)}')
 
 @description('Name for the Public IP used to access the Virtual Machine.')
-param publicIpName string = 'myPublicIP'
+param publicIpName string = 'myPublicIPCore'
 
 @description('Allocation method for the Public IP used to access the Virtual Machine.')
 @allowed([
@@ -28,15 +28,15 @@ param publicIpSku string = 'Basic'
 
 param OSVersion string = '2019-Datacenter-smalldisk'
 param vmSize string = 'Standard_D2s_v5'
-param location string = 'northeurope'
-param vmName string = 'simple-vm'
+param location string = 'uksouth'
+param vmName string = 'simple-vm-core'
 
-var storageAccountName = 'bootdiags${uniqueString(resourceGroup().id)}'
-var nicName = 'myVMNic'
+var storageAccountName = 'bootdiagsc${uniqueString(resourceGroup().id)}'
+var nicName = 'myVMNiccorevm'
 //var addressPrefix = '10.0.0.0/16'
 //var subnetPrefix = '10.0.0.0/24'
 //var virtualNetworkName = 'MyVNET'
-var networkSecurityGroupName = 'default-NSG'
+var networkSecurityGroupName = 'default-NSG-core'
 
 resource stg 'Microsoft.Storage/storageAccounts@2021-04-01' = {
   name: storageAccountName
@@ -84,11 +84,11 @@ resource securityGroup 'Microsoft.Network/networkSecurityGroups@2021-02-01' = {
 }
 
 //declarations for the nic
-param vnetnameforprivatedns string = 'MfgServicesVnet'
+param vnetnameforprivatedns string = 'CoreServicesVnet'
 resource coreservicesvnet 'Microsoft.Network/virtualNetworks@2022-07-01' existing = {
   name: vnetnameforprivatedns
 }
-var subnetName = 'sensorsubnet1'
+var subnetName = 'sharedservicessubnet'
 ///////////////////////////
 
 
@@ -98,7 +98,7 @@ resource nic 'Microsoft.Network/networkInterfaces@2021-02-01' = {
   properties: {
     ipConfigurations: [
       {
-        name: 'ipconfig1'
+        name: 'ipconfig2'
         properties: {
           privateIPAllocationMethod: 'Dynamic'
           publicIPAddress: {

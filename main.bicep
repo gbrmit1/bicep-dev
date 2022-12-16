@@ -26,7 +26,6 @@ module core_vnet_deployment './module/vnet_deployment.bicep' = {
         subnetprefix: '10.20.30.0/24'
       }
     ]
-
   }
 }
 
@@ -72,5 +71,30 @@ module res_vnet_deployment './module/vnet_deployment.bicep' = {
   }
 }
 
+module peering_core_mfg 'module/vnetpeering.bicep' = {
+  name: 'vnetpeeringcoretomfg'
+  params: {
+    localvnet: 'CoreServicesVnet'
+    vnettopeerwith: 'MfgServicesVnet'
+    vnetpeeringname: 'vnetpeeringcoretomfg'
+  }
+  dependsOn: [
+    res_vnet_deployment
+    core_vnet_deployment
+    mfg_vnet_deployment
+  ]
+}
 
-
+module peering_mfg_core 'module/vnetpeering.bicep' = {
+  name: 'vnetpeeringmfgtocore'
+  params: {
+    localvnet: 'MfgServicesVnet'
+    vnettopeerwith: 'CoreServicesVnet'
+    vnetpeeringname: 'vnetpeeringmfgtocore'
+  }
+  dependsOn: [
+    res_vnet_deployment
+    core_vnet_deployment
+    mfg_vnet_deployment
+  ]
+}
