@@ -6,7 +6,7 @@ module core_vnet_deployment './module/vnet_deployment.bicep' = {
   params: {
     vnetname: 'CoreServicesVnet'
     vnetaddressprefix: '10.20.0.0/16'
-    vnetlocation: 'eastus'
+    vnetlocation: 'uksouth'
     tagowner: 'robert mitchell'
     subnets:[
       {
@@ -35,7 +35,7 @@ module mfg_vnet_deployment './module/vnet_deployment.bicep' = {
   params: {
     vnetname: 'MfgServicesVnet'
     vnetaddressprefix: '10.30.0.0/16'
-    vnetlocation: 'westeurope'
+    vnetlocation: 'northeurope'
     tagowner: 'robert mitchell'
     subnets:[
       {
@@ -60,7 +60,7 @@ module res_vnet_deployment './module/vnet_deployment.bicep' = {
   params: {
     vnetname: 'ResServicesVnet'
     vnetaddressprefix: '10.40.0.0/16'
-    vnetlocation: 'southeastasia'
+    vnetlocation: 'ukwest'
     tagowner: 'robert mitchell'
     subnets:[
       {

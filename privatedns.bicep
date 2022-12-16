@@ -16,6 +16,7 @@ resource privatednszone 'Microsoft.Network/privateDnsZones@2020-06-01' = {
 resource privatednszonelink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = {
   name: 'contoso.com/LinkToMfgSubnet'
   location:'global'
+  dependsOn: [privatednszone]
   properties: {
     registrationEnabled:true
     virtualNetwork: {
